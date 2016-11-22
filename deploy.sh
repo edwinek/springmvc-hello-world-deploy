@@ -15,8 +15,7 @@ function cleanup_containers_and_files() {
 
 cleanup_containers_and_files
 
-docker build -t hw_getter_image getter/.
-docker run --name hw_getter_container -d hw_getter_image
+docker run --name hw_getter_container -d edwinek/alpine-git:latest
 docker exec -ti hw_getter_container git clone $PROJECT_URL /opt/src/$PROJECT_NAME
 docker exec -ti hw_getter_container sh -c "cd /opt/src/$PROJECT_NAME && git archive -o /tmp/$SRC_ARCHIVE master"
 docker cp hw_getter_container:/tmp/$SRC_ARCHIVE builder/$SRC_ARCHIVE
